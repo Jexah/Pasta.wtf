@@ -1,0 +1,26 @@
+extends layout
+
+block content
+	each unit in units
+		div(class='unitDisplayContainer')
+			input(id='save#{unit.name}Name' value='#{unit.name.replace(/_/g, " ")}' type='text')
+			each category in unit.categories
+				div(class='categoryDisplayContainer')
+					input(id='save#{unit.name}#{category.name}Name' value='#{category.name.replace(/_/g, " ")}' type='text')
+					each test in category.tests
+						div(class='testDisplayContainer')
+							input(id='save#{unit.name}#{category.name}#{test.name}Name' value='#{test.name.replace(/_/g, " ")}' type='text')
+							input(id='save#{unit.name}#{category.name}#{test.name}Cost' value='#{test.cost}' type='text')
+							textarea(id='save#{unit.name}#{category.name}#{test.name}Content') #{test.content}
+							div(class='saveBar')
+								button(class='btn unitDisplayContainerSave' val-unit='#{unit.name}' val-category='#{category.name}' val-test='#{test.name}') Save
+	div(class='unitDisplayContainer')
+		input(id='saveNew_UnitName' value='New_Unit' type='text')
+		div(class='categoryDisplayContainer')
+			input(id='saveNew_UnitNew_CategoryName' value='New_Category' type='text')
+			div(class='testDisplayContainer')
+				input(id='saveNew_UnitNew_CategoryNew_TestName' value='New_Test' type='text')
+				input(id='saveNew_UnitNew_CategoryNew_TestCost' value='5' type='text')
+				textarea(id='saveNew_UnitNew_CategoryNew_TestContent') New Test Content
+				div(class='saveBar')
+					button(class='btn unitDisplayContainerSave' val-unit='New_Unit' val-category='New_Category' val-test='New_Test') Save

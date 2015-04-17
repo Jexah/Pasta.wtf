@@ -1,0 +1,77 @@
+extends layout
+
+block content
+	include status
+	div(id='unitPage' class='unitPage') 
+		div(id='unitHeader' class='unitHeader') 
+			a(href='/') home
+			| &nbsp;&nbsp;//&nbsp;&nbsp;#{unit.name}
+		div(id='unitPageCategories' class='categories')
+			each category in unit.categories
+				div(id='unitPageCategory' class='category') #{category.name.replace(/_/g, ' ')}
+					each test in category.tests
+						div(id='unitPageCategoryTest#{test.name}' class='test')
+							div(id='unitPageCategoryTest#{test.name}Title' class='title') #{test.name.replace(/_/g, ' ')}
+							div(id='unitPageCategoryTest#{test.name}Actions' class='actions')
+								if user && user.credits > test.cost
+									button(id='unitPageCategoryTest#{test.name}Test' class='btn test') Test
+									input(unit-val="#{unit.name}" category-val="#{category.name}" test-val="#{test.name}" type="file" name="files" data-url="/upload" hidden="hidden")
+								else
+									button(id='unitPageCategoryTest#{test.name}Test' disabled="" class='btn test') Test
+								div(id='unitPageCategoryTest#{test.name}Coin' class='coin')
+								div(id='unitPageCategoryTest#{test.name}Cost' class='cost') #{test.cost}
+							if user
+								div(id='#{unit.name}#{category.name}#{test.name}' class='accordion_root')
+									- var count = 0;
+									if user.tests && user.tests[unit.name] && user.tests[unit.name][category.name] && user.tests[unit.name][category.name][test.name]
+										div(class="accordion" style="padding:10px;")
+											each testRecord in user.tests[unit.name][category.name][test.name]
+												h3(style="padding-left:20px;") 
+													script(type='text/javascript').
+														var datetime = new Date(#{testRecord.date});
+														var seconds = datetime.getSeconds();
+														var minutes = datetime.getMinutes();
+														var hours = datetime.getHours();
+														var date = datetime.getDate();
+														var month = datetime.getMonth();
+														var year = datetime.getFullYear();
+														var result = 
+														(date < 10 ? "0" + date : date) + "/" + 
+														(month + 1 < 10 ? "0" + (month + 1): (month + 1)) + "/" + 
+														(year) + " " + 
+														(hours < 10 ? "0" + hours : hours) + ":" + 
+														(minutes < 10 ? "0" + minutes : minutes) + ":" + 
+														(seconds  < 10 ? "0" + seconds : seconds);
+													- count++;
+													| Test #{count}
+													br
+													script(type='text/javascript').
+														document.write(result);
+
+												div(class="accordion" style="padding:10px;")
+													h3(style="padding-left:20px;") 
+														| Result
+													div(style="padding:10px;")
+														pre
+															code(class='language-java')
+																| #{testRecord.result}
+													h3(style="padding-left:20px;") 
+														| Files
+													div(class='accordion' style="padding:10px;")
+														each file in testRecord.files
+															h3(style="padding-left:20px;") 
+																| #{file.name}
+															div(style="padding:10px;")
+																pre(class="line-numbers")
+																	code(class='language-java')
+																		| #{file.content}
+	script.
+		$(function() {
+			$( ".accordion" ).accordion({
+				collapsible: true,
+				heightStyle: "content",
+				active:false
+			});
+		})
+		Prism.highlightAll(false);
+	

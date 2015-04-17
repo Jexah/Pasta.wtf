@@ -1,0 +1,11 @@
+div(id='status' class='status')
+	if user
+		div(id='statusDisplayName' class='displayName') #{user.displayName}
+		div(id='statusCredits' class='credits')
+			div(id='statusCreditsText' class='text') #{user.credits}
+			div(id='statusCreditsPicture' class='picture')
+	else
+		div(id='statusDisplayName' class='displayName') Anonymous
+		div(id='statusCredits' class='credits')
+			div(id='statusCreditsText' class='text') 0
+			div(id='statusCreditsPicture' class='picture')

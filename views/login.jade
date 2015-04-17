@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	div(id='signInContainer' class='signInContainer')
+		div(id='signInContainer2' class='container2')
+			button(id='signInContainerFacebook' class='btn facebook') 
+				img(src='images/fb_tiny.png' width='13px' height='13px') 
+				| &nbsp;Log in with 
+				span(style='font-weight:bold;') Facebook
+			div(id='signInContainerRegular' class='regular')
+				input(id='signInContainerRegularUsername' maxlength='12' type='text' class='text' placeholder='Username')
+				input(id='signInContainerRegularPassword' maxlength='15' type='password' class='text' placeholder='••••••••')
+				button(id='signInContainerRegularButton' class='btn') Login
+

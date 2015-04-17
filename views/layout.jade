@@ -1,0 +1,43 @@
+doctype html
+html
+	head
+		title= 'Pasta++'
+		link(rel='stylesheet' href='/css/main.min.css')
+		script(type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+		script(type='test/javascript' src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js")
+		script(type='text/javascript' src='/js/main.min.js')
+
+	body
+		div(class="font-loader" style="font-family: 'Lato', sans-serif;font-weight:400;")
+			|a
+		div(class="font-loader" style="font-family: 'Raleway', sans-serif;font-size:24px;")
+			|a
+		div(class="font-loader" style="font-family:'Lato', sans-serif;")
+			|a
+		div(class="font-loader" style="font-family:'Lato', sans-serif;font-weight:800;")
+			|a
+		div(class="font-loader" style="font-family:'Raleway', sans-serif;font-weight:300;")
+			|a
+		div(class="font-loader" style="font-family: 'Lato', sans-serif;font-weight:100;")
+			|a
+		div(id='header' class='header')
+			div(id='headerLogo' class='logo') pasta++
+				span(style='font-style:italic;font-size:26px;') alpha
+			div(id='headerActions' class='actions')
+				if user
+					if user.facebook
+						if user.facebook.id == '972394002786065'
+							button(id='headerActionsAdmin' class='action btn action-btn' onclick='location.href="/admin"') admin
+					button(id='headerActionsProfile' disabled="" class='action btn action-btn') profile
+				else
+					button(id='headerActionsSignIn' class='action btn action-btn') login
+				button(id='headerActionsGift' disabled="" class='action btn action-btn') gift
+				button(id='headerActionsRecharge' disabled="" class='action btn buy-btn') recharge
+		block content
+
+		div(id='footer' class='footer')
+			div(id='footerLinks' class='links')
+				a(href='/') HOME
+				| &nbsp;&nbsp;|&nbsp;&nbsp;
+				a(href='/tos') TERMS OF SERVICE &amp; PRIVACY POLICY
+			div(id='footerCopyright' class='copyright') Copyright &copy;2014 Jeremy Short
