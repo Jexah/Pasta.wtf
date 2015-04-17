@@ -7,3 +7,5 @@ If you wish to run this website, you must generate SSL certs, put them in the SS
 You can then add test cases as you please, from the admin menu on the website. They are saved (and accessible) via the following hirachy: /unit/week/task
 
 The cost (in credits) for using a test is also modifiable.
+
+Note: These files are missing, because the filenames are too long: http://puu.sh/hgNaY/58961b9651.png
